@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-dna_input = input("Enter DNA: ")
+# User can enter either DNA sequence or RNA sequence.
+dna_input = input("Enter DNA sequence or RNA sequence: ")
 
 dna = dna_input.upper()     # converting DNA in uppercase.
 
@@ -26,7 +27,7 @@ for nt in dna_list:
         rna_list.append("U")
 
 rna = "".join(str(nt) for nt in rna_list)
-print("RNA : " + rna)
+print("RNA sequence : " + rna)
 
 codon_list = []     # Defining codon list having codons.
 
@@ -50,7 +51,7 @@ def codon_to_protein(codon_list):
         elif codon == ("U", "C", "U") or codon == ("U", "C", "C") or codon == ("U", "C", "A") or codon == ("U", "C", "G"):
             protein_list.append("Ser(S)")
         elif codon == ("U", "A", "U") or codon == ("U", "A", "C"):
-            protein_list.append("Tyr(y)")
+            protein_list.append("Tyr(Y)")
         elif codon == ("U", "G", "U") or codon == ('U', 'G', 'C'):
             protein_list.append("Cys(c)")
         elif codon == ('U', 'G', 'G'):
@@ -66,7 +67,7 @@ def codon_to_protein(codon_list):
         elif codon == ('C', 'G', 'U') or codon == ('C', 'G', 'G') or codon == ('C', 'G', 'C') or codon == ('C', 'G', 'A'):
             protein_list.append("Arg(R)")
         elif codon == ('A', 'U', 'G'):
-            protein_list.append("START_[Met(M)]")
+            protein_list.append("[START] Met(M)")
         elif codon == ('A', 'U', 'U') or codon == ('A', 'U', 'C') or codon == ('A', 'U', 'A'):
             protein_list.append("Ile(I)")
         elif codon == ('A', 'C', 'U') or codon == ('A', 'C', 'G') or codon ==  ('A', 'C', 'A') or codon ==  ('A', 'C', 'C'):
@@ -93,8 +94,8 @@ def codon_to_protein(codon_list):
             protein_list.append("STOP")
 
     # To get amino acids from start codon to end codon only>
-    if "START_[Met(M)]" in protein_list:
-        start = protein_list.index("START_[Met(M)]")
+    if "[START] Met(M)" in protein_list:
+        start = protein_list.index("[START] Met(M)")
     else:
         start = 0
     if "STOP" in protein_list:
