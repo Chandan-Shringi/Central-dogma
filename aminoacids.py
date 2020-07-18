@@ -43,6 +43,10 @@ for i in range(0, len(rna_list), 3):
 def codon_to_protein(codon_list):
     protein_list = []
     protein_list_final = []
+
+    is_start = False   # Checks if Start codon is presenst.
+    is_stop = False    # Checks if Stop codon is present.
+
     for codon in codon_list:
         if codon == ("U", "U", "U") or codon == ("U", "U", "C"):
             protein_list.append("Phe(F)")
@@ -93,15 +97,29 @@ def codon_to_protein(codon_list):
         elif codon == ('U', 'G', 'A') or codon == ('U', 'A', 'G') or codon == ('U', 'A', 'A'):
             protein_list.append("STOP")
 
-    # To get amino acids from start codon to end codon only>
+    # To get amino acids from start codon to end codon only
+
     if "[START] Met(M)" in protein_list:
-        start = protein_list.index("[START] Met(M)")
-    else:
-        start = 0
+        is_start = True
     if "STOP" in protein_list:
+        is_stop = True
+
+    if is_start == True and is_stop == True:
+        start = protein_list.index("[START] Met(M)")
         stop = protein_list.index("STOP")
-    else:
+        print("Note : Sequence has an internal start codon and a stop codon.")
+    elif is_start == True and is_stop == False:
+        start = protein_list.index("[START] Met(M)")
         stop = len(protein_list)
+        print("Note : Sequence has an internal start codon.")
+    elif is_start == False and is_stop == True:
+        start = 0
+        stop = protein_list.index("STOP")
+        print("Note : Sequence has an internal stop codon.")
+    elif is_start == False and is_stop == False:
+        start = 0
+        stop = len(protein_list)
+
     protein_list_final = protein_list[start:stop+1]
 
     protein = "".join(str(protein) for protein in protein_list_final)
