@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 
 # User can enter either DNA sequence or RNA sequence.
-dna_input = input("Enter DNA sequence or RNA sequence: ")
+right_dna = False
+while right_dna == False:
+    dna_input = input("Enter DNA sequence or RNA sequence: ")
 
-dna = dna_input.upper()     # converting DNA in uppercase.
+    dna = dna_input.upper()     # converting DNA in uppercase.
 
-if len(dna) % 3 != 0:
-    print("Warning: Nucleotides in DNA are not in multiple of 3")    # checking if nucleatides in input DNA are in multiple of three.
+    if len(dna) % 3 != 0:
+        print("Note : Nucleotides in DNA are not in multiple of 3")    # checking if nucleatides in input DNA are in multiple of three.
 
+    for nt in dna:
+        if nt == "A" or nt == "T" or nt == "G" or nt == "C" or nt == "U":
+            right_dna = True
+            #print ("Dna sequence is incorrect. Please check the nucleotides")
+        else:
+            print ("Dna sequence is incorrect. Please check the nucleotides")
+            right_dna = False
+            break
 
 
 # making a list out of nucleotides in dna_list.
