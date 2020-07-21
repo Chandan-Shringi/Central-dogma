@@ -39,15 +39,28 @@ for nt in dna_list:
 rna = "".join(str(nt) for nt in rna_list)
 print("RNA sequence : " + rna)
 
-codon_list = []     # Defining codon list having codons.
+# Defining codon list having codons.
+codon_list0 = []
+codon_list1 = []
+codon_list2 = []
 
 # Making codons from RNA
+# codons 0
 for i in range(0, len(rna_list), 3):
     codon = tuple(rna_list[i:i+3])
-    codon_list.append(codon)    # codon_list is a list tupels containig codon.
+    codon_list0.append(codon)    # codon_list is a list tupels containig codon, starting from the first codon.
+# codons 1
+for i in range(1, len(rna_list), 3):
+    codon = tuple(rna_list[i:i+3])
+    codon_list1.append(codon)    # codon_list is a list tupels containig codon, starting from the seconf codon.
+# codons 2
+for i in range(2, len(rna_list), 3):
+    codon = tuple(rna_list[i:i+3])
+    codon_list2.append(codon)    # codon_list is a list tupels containig codon, starting from the third codon.
 
-# print("Codons : " , codon_list)
-
+#print("Codons 0 : " , codon_list0)
+#print("Codons 1 : " , codon_list1)
+#print("Codons 2 : " , codon_list2)
 
 # Function for converting codons into their protein.
 def codon_to_protein(codon_list):
@@ -137,5 +150,27 @@ def codon_to_protein(codon_list):
     return protein
 
 # Driver code
-proteins = codon_to_protein(codon_list)
-print("Protein : " , proteins)
+protein0 = codon_to_protein(codon_list0)
+protein1 = codon_to_protein(codon_list1)
+protein2 = codon_to_protein(codon_list2)
+print("Protein possibility I : " , protein0)
+print("Protein possibility II : " , protein1)
+print("Protein possibility III : " , protein2)
+
+# Checking the largest protein out of these three.
+protein0_length = len(protein0)
+protein1_length = len(protein1)
+protein2_length = len(protein2)
+
+if protein0_length > protein1_length and protein0_length > protein2_length:
+    final_protein = protein0
+    final_protein_prob = "Possibility I"
+elif protein1_length > protein0_length and protein1_length > protein2_length:
+    final_protein = protein1
+    final_protein_prob = "Possibility II"
+elif protein2_length > protein0_length and protein2_length > protein1_length:
+    final_protein = protein2
+    final_protein_prob = "Possibility III"
+
+print("The largest of the three possible proteins is  {} ".format(final_protein_prob))
+print("\n \n \t \tSo, the most probable protein outcome is \" {} \" ".format(final_protein))
