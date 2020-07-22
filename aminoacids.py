@@ -37,7 +37,8 @@ for nt in dna_list:
         rna_list.append("U")
 
 rna = "".join(str(nt) for nt in rna_list)
-print("RNA sequence : " + rna)
+print("\n\tRNA sequence : " + rna)
+print("\n")
 
 # Defining codon list having codons.
 codon_list0 = []
